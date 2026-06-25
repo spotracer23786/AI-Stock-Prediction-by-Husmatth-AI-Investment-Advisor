@@ -167,9 +167,22 @@ page = st.sidebar.radio(
 # DOWNLOAD DATA
 # ===================================
 
-df = yf.Ticker(stock).history(
-    period="5y"
-)
+try:
+    df = yf.download(
+        stock,
+        period="5y",
+        progress=False,
+        auto_adjust=True,
+        threads=False
+    )
+
+    if df.empty:
+        st.error("Unable to fetch stock data. Please try again later.")
+        st.stop()
+
+except Exception as e:
+    st.error(f"Stock data unavailable: {e}")
+    st.stop()
 
 # ===================================
 # TECHNICAL INDICATORS
