@@ -363,22 +363,6 @@ streamlit run app.py
 ```
 
 ---
-
-# 📷 Screenshots
-
-> Add screenshots of the dashboard after deployment.
-
-Suggested screenshots:
-
-* Dashboard
-* Prediction Metrics
-* Candlestick Chart
-* Portfolio Recommendation
-* Prediction History
-* Model Comparison
-
----
-
 # 🔮 Future Improvements
 
 * Transformer-based Stock Forecasting
