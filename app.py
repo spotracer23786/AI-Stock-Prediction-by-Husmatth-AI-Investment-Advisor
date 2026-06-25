@@ -175,6 +175,11 @@ try:
         auto_adjust=True,
         threads=False
     )
+    st.write("Columns:")
+    st.write(df.columns)
+
+    st.write("Shape:")
+    st.write(df.shape)
 
     if df.empty:
         st.error("Yahoo Finance returned no data. Please try again later.")
