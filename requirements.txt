@@ -10,3 +10,4 @@ ta
 newsapi-python
 textblob
 Pillow
+python-dotenv
