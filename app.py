@@ -175,6 +175,10 @@ try:
         auto_adjust=True,
         threads=False
     )
+    # Fix MultiIndex columns from yfinance
+    if hasattr(df.columns, "levels"):
+        df.columns = df.columns.get_level_values(0)
+
     st.write("Columns:")
     st.write(df.columns)
 
