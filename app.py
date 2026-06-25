@@ -177,13 +177,12 @@ try:
     )
 
     if df.empty:
-        st.error("Unable to fetch stock data. Please try again later.")
+        st.error("Yahoo Finance returned no data. Please try again later.")
         st.stop()
 
-except Exception as e:
-    st.error(f"Stock data unavailable: {e}")
+except Exception:
+    st.error("Yahoo Finance is temporarily rate-limited. Please try again in a few minutes.")
     st.stop()
-
 # ===================================
 # TECHNICAL INDICATORS
 # ===================================
