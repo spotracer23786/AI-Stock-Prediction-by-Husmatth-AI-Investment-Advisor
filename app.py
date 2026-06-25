@@ -7,6 +7,7 @@ import joblib
 import plotly.express as px
 import os
 import time
+from PIL import Image
 
 from news_sentiment import get_sentiment
 from tensorflow.keras.models import load_model
@@ -24,20 +25,61 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-.main {
-    background-color: #0E1117;
+
+/* Main Background */
+.stApp {
+    background: linear-gradient(135deg,#0F172A,#111827,#1E293B);
+    color: #F8FAFC;
 }
 
-[data-testid="stMetric"] {
-    background-color: #1E1E1E;
-    border: 1px solid #2A2A2A;
-    border-radius: 15px;
-    padding: 15px;
+/* Metric Cards */
+[data-testid="stMetric"]{
+    background-color:#1E293B;
+    border:1px solid #334155;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0px 4px 12px rgba(0,0,0,0.35);
 }
 
-section[data-testid="stSidebar"] {
-    background-color: #111827;
+/* Sidebar */
+section[data-testid="stSidebar"]{
+    background-color:#111827;
 }
+
+/* Buttons */
+.stButton>button{
+    background-color:#2563EB;
+    color:white;
+    border-radius:10px;
+    border:none;
+    padding:10px 20px;
+}
+
+.stButton>button:hover{
+    background-color:#1D4ED8;
+}
+
+/* Selectbox */
+.stSelectbox>div>div{
+    background-color:#1E293B;
+    color:white;
+}
+
+/* Number Input */
+.stNumberInput input{
+    background-color:#1E293B;
+    color:white;
+}
+
+/* DataFrame */
+[data-testid="stDataFrame"]{
+    border-radius:15px;
+}
+
+h1,h2,h3{
+    color:white;
+}
+
 </style>
 """, unsafe_allow_html=True)
 # ===================================
@@ -59,7 +101,6 @@ model = load_model(
 scaler = joblib.load(
     "models/scaler.pkl"
 )
-
 status.text("📈 Fetching Live Stock Data...")
 progress_bar.progress(45)
 time.sleep(0.8)
@@ -81,18 +122,17 @@ status.success("✅ AI Investment Advisor Ready!")
 # TITLE
 # ===================================
 
-st.markdown("""
-# 📈 AI Investment Advisor
+banner = Image.open("assets/banner.png")
 
-### Real-Time Financial Intelligence Platform
+st.image(
+    banner,
+    use_container_width=True
+)
 
-Powered by:
-- LSTM Deep Learning
-- News Sentiment Analysis
-- Portfolio Analytics
-- Technical Indicators (RSI, MACD, SMA, EMA)
-""")
-
+st.markdown(
+    "<br>",
+    unsafe_allow_html=True
+)
 # ===================================
 # STOCK SELECTION
 # ===================================
@@ -346,12 +386,15 @@ if page == "Dashboard":
     )
 
     fig.update_layout(
-        title=f"{stock} Stock Price",
-        xaxis_title="Date",
-        yaxis_title="Price",
-        height=700
+    template="plotly_dark",
+    title=f"{stock} Stock Price",
+    xaxis_title="Date",
+    yaxis_title="Price",
+    paper_bgcolor="#0F172A",
+    plot_bgcolor="#0F172A",
+    font=dict(color="white"),
+    height=700
     )
-
     st.plotly_chart(
         fig,
         use_container_width=True
@@ -390,7 +433,11 @@ if page == "Dashboard":
     )
 
     trend_fig.update_layout(
-        height=600
+    template="plotly_dark",
+    paper_bgcolor="#0F172A",
+    plot_bgcolor="#0F172A",
+    font=dict(color="white"),
+    height=600
     )
 
     st.plotly_chart(
