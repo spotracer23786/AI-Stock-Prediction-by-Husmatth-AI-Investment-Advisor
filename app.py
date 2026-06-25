@@ -6,6 +6,7 @@ import ta
 import joblib
 import plotly.express as px
 import os
+import time
 
 from news_sentiment import get_sentiment
 from tensorflow.keras.models import load_model
@@ -40,8 +41,15 @@ section[data-testid="stSidebar"] {
 </style>
 """, unsafe_allow_html=True)
 # ===================================
-# LOAD MODEL
+# LOADING ANIMATION
 # ===================================
+
+progress_bar = st.progress(0)
+status = st.empty()
+
+status.text("🤖 Loading AI Model...")
+progress_bar.progress(20)
+time.sleep(0.8)
 
 model = load_model(
     "models/lstm_stock_model.h5",
@@ -52,6 +60,23 @@ scaler = joblib.load(
     "models/scaler.pkl"
 )
 
+status.text("📈 Fetching Live Stock Data...")
+progress_bar.progress(45)
+time.sleep(0.8)
+
+status.text("📰 Analyzing Market News...")
+progress_bar.progress(70)
+time.sleep(0.8)
+
+status.text("🧠 Running LSTM Prediction...")
+progress_bar.progress(90)
+time.sleep(0.8)
+
+status.text("🚀 Preparing Dashboard...")
+progress_bar.progress(100)
+time.sleep(0.6)
+
+status.success("✅ AI Investment Advisor Ready!")
 # ===================================
 # TITLE
 # ===================================
